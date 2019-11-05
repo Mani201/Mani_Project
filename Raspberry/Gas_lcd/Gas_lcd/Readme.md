@@ -1,7 +1,11 @@
-라즈베리파이와 AWS의 통신을 진행
+Development environment : Raspberry Pi3
 
-라즈베리파이의 동작
-가스감지 센서로 실시간 가스감지 측정
-만약 측정된 가스가 일정수치 이상일 경우 라즈베리파이에 연결된 카메라로 사진촬영
-LCD에 경고문 출력 , LED , 부저 출력
-촬영된 사진을 AWS웹 서버로 전송 
+Target Board : Raspberry Pi3
+
+used module : gas detection sensor , CLCD , Buzzer , LED , Camera 
+
+When gas detection sensor detects values above the standard value, it outputs data to LCD, LED, and buzzer. 
+
+It then takes pictures with a camera connected to the raspberry pi. 
+
+After taking pictures, the pictures are sent to the AWS web server.
