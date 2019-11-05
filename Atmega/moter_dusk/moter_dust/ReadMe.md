@@ -1,4 +1,9 @@
-먼지감지 센서로 센서값을 측정하여 일정 수치 이상일 경우 스텝모터를 역방향 회전, 이후 수치가 떨어질 경우 정방향 회전
+Development environment : AVR Studio 4
 
+Target Board : Atmega128
+
+used module : GP2Y1010AU0F ( Dust sensor ) , Stepper motor , CLCD
+
+This firmware measures the amount of dust in the air with a dust sensor and outputs it to the LCD. Operate the stepper motor according to the measured values.
 
  
