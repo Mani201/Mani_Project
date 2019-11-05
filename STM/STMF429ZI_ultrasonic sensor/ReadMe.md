@@ -1,6 +1,10 @@
-초음파 센서동작에 따라 PORTD의 LED를 제어 
-LED 1 ~ 6 각각 거리에 따라 동작
-LED 8 PC에서 커맨드 수신시 동작
+Development environment : Keil 5
 
-USART 양방향 통신
+Target Board : Nucleo-f429zi
 
+used module : LED , Ultrasonic sensors
+
+Measure the distance with an ultrasonic sensor and activate the LED at a certain distance. 
+(5cm ~ 10cm LED1 On, 10cm ~ 15cm LED2 On ... )
+When a command is sent from a PC to the target board, the measured distance value is repeated and sent to the PC.
+Sending a stop command terminates the transfer.
