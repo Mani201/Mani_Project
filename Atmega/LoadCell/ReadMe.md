@@ -1,1 +1,10 @@
-로드셀을 사용하여 무게 측정 후 UART로 측정된 무게 전송
+Development environment : AVR Studio 4
+
+Target Board : Atmega128
+
+used module : LoadCell
+
+A program that uses a loadcell to measure weight and sends the measured weight to a PC via UART.
+
+
+
