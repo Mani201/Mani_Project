@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<form action="./s2.html" method="post">
+		<input id="test" type="text" name="price" value="1">
+		<input type="hidden" name="goodsCode" value="p2">
+		<input type="submit" OnClick="return click()" value="장바구니에 담기">
+	</form>
+	<script type="text/javascript">
+		
+		function click() {
+			// body...
+			var s2d = document.getElementById('test');
+			var vvv =s2d.value;
+			s2d.value=vvv+1;
+			
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+<html>
+<head>
+	<title></title>
+ 	
+	<script type="text/javascript">
+
+	let newForm = document.createElement('form');
+	function button1_click(s) {
+		var del_cookies = document.getElementById('del_id');
+		del_cookies.value = s;
+		newForm.submit()
+	}
+	
+
+	window.onload = function () {
+	// 장바구니 목록 검색
+	var cart_list_tmp = "{{cart_dict}}";
+	var cart_list = cart_list_tmp.split('&#39;');
+	var cart_len = {{list_len}};
+	
+	
+	var basket = new Array(cart_len)
+
+	for (var i = 0; i < basket.length; i++) {
+    	basket[i] = new Array(2);
+	}
+//공백 제거 필요
+	for(var i=1,j=0; i<cart_list.length; i+=2,j++) {
+		cart_list[j] = cart_list[i].replace(/{|,|:|}|\s/gi,"")	
+	}
+	for(var k=0, i=0,j=0; i< ((cart_list.length-1)/4); i++,j+=2){
+		basket[i][k] = cart_list[j];
+		basket[i][k+1] = cart_list[j+1];
+	}
+
+		// 장바구니 목록 삭제 form code = 1	
+	newForm.method = 'POST';
+	newForm.action = "/home/cartlist";
+	newForm.name = 'newForm';
+	newForm.onsubmit = "button1_click()"
+	let cmdcode_data = document.createElement("input");
+	cmdcode_data.setAttribute('type','hidden');
+	cmdcode_data.setAttribute('name','cmdcode');
+	cmdcode_data.setAttribute('value','0');
+	newForm.appendChild(cmdcode_data);
+	let del_id = document.createElement("input");
+	del_id.setAttribute('type','hidden');
+	del_id.setAttribute('name','delcode');
+	del_id.setAttribute('id','del_id');
+	del_id.setAttribute('value',1);
+	newForm.appendChild(del_id);
+		
+	document.body.appendChild(newForm);
+
+	// 장바구니 목룩 출력	
+	if(cart_list.length != 0){
+
+
+		var bodyObj = document.getElementById("body");
+		for(var i=0;i<basket.length;i++){
+		var inner_ = document.createElement("div");
+		inner_.id = "TEST_DIV"+i;
+		inner_.innerHTML= [
+			"<a href=/home/",basket[i][0],"><img src=","/static/img/",basket[i][0],".jpg ","border=0 style=","margins:0 auto; width:300px; height:300px",">",
+			"</a>",
+			"<p>price: </p>",basket[i][1],"<p>Code: </p>",basket[i][0],"<br>",			
+			"<button id=del_",i," onclick=button1_click('",basket[i][0],"');",">삭제</button>",
+
+		].join("");
+		document.body.appendChild(inner_);
+		}
+	}
+}
+
+	// 장바구니 목록 수정 form code = 2
+
+	//딕셔너리로 서버에서 장바구니 목록 정보 저장하다가 이 페이지 호출되면 딕셔너리 가져오ㅏ서 파싱하여 사용해보자
+
+	</script>
+</head>
+<body id="body">
+	<a href="{{url_for('home')}}">home</a>
+	<form action="/home/purchase" method="post">
+		<input type="hidden" name="buy_item" value="1">
+		<input type="submit" value="구매">
+	</form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	name : <input type="text" id="name">
+	value : <input type="text" id="value">
+	<input type="button" value="add cookie" onclick="setCookie('pop', 'event0405', 7)">
+	<input type="button" value="del cookie" onclick="">
+	<div id="cookie_list" style="border: 1px solid #000000; padding: 10px; margin-top: 10px;">
+	</div>
+<a href="#" onclick="setCookie('pop', 'event0405', 1); " class="accept">1일동안 열지 않음.</a>
+
+
+	<script>
+		
+	function setCookie(name, value, exp) {
+  var date = new Date();
+  date.setTime(date.getTime() + exp*24*60*60*1000);
+  document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+}
+
+ /* pop=event0405, 7일 뒤 만료됨 */
+function getCookie(name) {
+  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return value? value[2] : null;
+}
+
+var s = getCookie('pop'); /* 결과: pop0405 */
+
+function deleteCookie(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+if(getCookie("pop") =="event0405"){
+ alert(" 버튼을 누르셨습니다.");
+}
+	</script>
+</body>
+</html>

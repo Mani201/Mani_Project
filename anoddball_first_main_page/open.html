@@ -1,0 +1,101 @@
+<html>
+  <head>
+   <style>
+   .layer{
+   position:absolute;
+   top:50%;
+   left:50%;
+   transform:translate(-50%, -50%)
+   }
+   </style>
+  </head>
+  <body onload="showImage()">
+  <div class = "layer" id="show_div" >
+  <img id="introimg" border ="0" alt="LogoImage"
+   style="margins:0 auto; width:636px; heigth:900px"
+   
+  />
+  <p id="test" style="font-size:7em;">Test Text</p>
+  </div>
+
+  <script async type="text/javascript">
+  var imgArr = new Array();
+  imgArr[1] = "black.png";
+  imgArr[0] = "white.png";
+  var imgNum =0;
+  var obj=document.getElementById("introimg");
+  var text = document.getElementById("test");
+  var show_num =0;
+  var delay_num=0;
+  <!-- 
+  function delay(time){
+   var then,now;
+   then = new Date().getTime();
+   now = then;
+   while((now-then)<time){
+    now = new Date().getTime();
+   }
+  }
+  -->
+ <!--
+  function click_evt(){
+  <!-- obj.style.visibility = 'hidden'; -->
+  <!-- document.getElementById('introimg').setAttribute('display','none'); -->
+  <!--  document.all.introimg.style.display="none"; -->
+   if( show_num === 0){
+    show_num =1; 
+    document.all.introimg.style.display="none";
+    setTimeout("",5000);   
+   <!-- document.all.introimg.style.display=""; -->
+   }
+   else{
+    document.all.test.style.display="none";
+    show_num = 0;
+    document.all.introimg.style.display="";
+    showImage();
+   }
+  
+  }
+  -->
+  
+  function showImage(){
+  if(delay_num === 50){
+  show_num =1;
+  document.all.introimg.style.display="none";
+  setTimeout(showImage,100);
+  }
+  else if(delay_num <= 150 && delay_num >= 50 ){
+  delay_num++;
+  setTimeout(showimage,100);
+  }
+  else if(delay_num >= 150){
+  delay_num =0;
+  document.all.introimg.style.display="";
+  show_num =0;
+  
+  }
+  if(show_num === 0){
+   delay_num++;
+   document.all.test.style.display="none";
+   obj.src = imgArr[imgNum];
+   if ( imgNum === 1 ){
+    document.body.style.background='black';
+    imgNum = 0;
+    document.all.test.style.color="white";
+   }
+   else {
+    document.body.style.background='white';
+    imgNum = 1;
+    document.all.test.style.color="black";
+   }  
+  setTimeout(showImage,100);
+  }
+  else {
+  document.all.test.style.display="";
+  }
+ 
+  }
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<script>
+	let newForm = document.createElement('form');
+	function getCookie(name) {
+ 		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+ 	 	return value? value[2] : null;
+	}
+	function deleteCookie(name) {
+  	
+  		var date = new Date();
+  		date.setTime(date.getTime() + 0*1000);
+  		document.cookie = name + '=;expires=' + date.toUTCString() + ';path=/';
+	}
+	// 폼으로 코드전송하고 -1 하는건 완료되었음 쿠키값 정상적으로 삭제안되고있고 div 삭제도 오류가 있어보임 확일 필
+	function button1_click(s) {
+
+		var ck_code = "code"+s;
+		var ck_price = "price"+s;
+		alert(s+" : Test : "+ck_code+" "+ ck_price);
+		deleteCookie(ck_code);
+		deleteCookie(ck_price);		
+		var bodyid = document.getElementById("body");
+		var del_div = document.getElementById("TEST_DIV"+s);
+		bodyid.removeChild(del_div);
+		
+	}
+	window.onload = function () {
+          
+	var list_len = {{list_len}};
+	var arr = new Array(list_len)
+
+	for (var i = 0; i < arr.length; i++) {
+    	arr[i] = new Array(2);
+	}
+	
+	//자바스크립트에서 쿠키값 받아오는거 까지 완료됨 이걸 배열에 넣어서 저장하든지 바로 출력시키든지 하면될듯
+	for(var i=0; i<list_len; i++){
+		var price = getCookie('price'+i)
+		var code = getCookie('code'+i)
+		arr[i][0] = code
+		arr[i][1] = price
+	}
+		
+		newForm.method = 'POST';
+		newForm.action = "/home/cartlist1";
+		newForm.name = 'newForm';
+		newForm.onsubmit = "button1_click()"
+		let data = document.createElement("input");
+		data.setAttribute('type','hidden');
+		data.setAttribute('name','ckn');
+		data.setAttribute('value','ckn_m_1');
+
+		newForm.appendChild(data);
+		document.body.appendChild(newForm);
+		
+	if(list_len != 0){
+
+
+		var bodyObj = document.getElementById("body");
+		for(var i=0;i<list_len;i++){
+		var inner_ = document.createElement("div");
+		inner_.id = "TEST_DIV"+i;
+		inner_.innerHTML= [
+			"<a href=/home/",arr[i][0],"><img src=","/static/img/",arr[i][0],".jpg ","border=0 style=","margins:0 auto; width:300px; height:300px",">",
+			"</a>",
+			"<label><input type=", "checkbox", " name=","color"," value=",arr[i][0],"> </label>",
+			"<p>price: </p>",arr[i][1],"<p>Code: </p>",arr[i][0],"<br>",			
+			"<button id=del_",i," onclick=button1_click('",i,"');",">삭제</button>",
+
+		].join("");
+		bodyObj.appendChild(inner_);
+		}
+	}
+	}
+	
+
+
+
+</script>
+</head>
+<body id="body">
+	<a href="{{url_for('home')}}">home</a>
+
+
+</body>
+</html>
